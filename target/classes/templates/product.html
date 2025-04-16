@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::Layout(~{::section})}">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Sustainable Education</title>
+  <style>
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .card {
+      flex: 1;
+      min-width: 250px;
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card-body img {
+      flex-shrink: 0; /* Prevent image from shrinking */
+    }
+    .card-body .text-center {
+      flex-grow: 1; /* Allow text to grow and fill space */
+    }
+    /* Light Green Background for the search section */
+    .search-section {
+      background-color: #28a745; /* Green */
+      padding: 30px;
+    }
+    .search-section input,
+    .search-section button {
+      border: 1px solid #28a745;
+    }
+    .search-section button {
+      background-color: #28a745;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <!-- Updated background color to green -->
+    <div class="container-fluid search-section p-5 mt-5">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <form>
+            <div class="input-group">
+              <input type="text" class="form-control" name="ch">
+              <button class="btn ms-3 col-md-2">
+                <i class="fa-solid fa-magnifying-glass"></i> Search
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid mt-1">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+              Navigation Bar
+            </a>
+            <a href="/what" class="list-group-item list-group-item-action">What is sustainability</a>
+            <a href="/why" class="list-group-item list-group-item-action">Why do we need it?</a>
+            <a href="/video" class="list-group-item list-group-item-action">Video Materials</a>
+            <a href="/resources" class="list-group-item list-group-item-action">Quiz</a>
+            <a href="/rewards" class="list-group-item list-group-item-action">Rewards for progress</a>
+            <a href="/profile" class="list-group-item list-group-item-action">About the Founders</a>
+          </div>
+        </div>
+        <div class="col-md-10">
+          <div class="card">
+            <div class="card-body">
+              <p class="fs-3 text-center">Let's Build Your Knowledge!!</p>
+              <div class="row card-container">
+                <!-- Course cards -->
+                <div class="col-md-3">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <img alt="" src="images/solar.jpg" width="100%" height="150px">
+                      <p class="fs-5 text-center">Introduction to Solar Energy</p>
+                      <a href="images/solar.pdf" class="btn btn-primary col-md-6 offset-md-3" target="_blank">View material</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <img alt="" src="images/windmill.jpg" width="100%" height="150px">
+                      <p class="fs-5 text-center">How Windmills Generate Electricity</p>
+                      <a href="images/wind.pdf" class="btn btn-primary col-md-6 offset-md-3" target="_blank">View material</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <img alt="" src="images/recycle.jpg" width="100%" height="150px">
+                      <p class="fs-5 text-center">The Importance of Recycling</p>
+                      <a href="images/recycle.pdf" class="btn btn-primary col-md-6 offset-md-3" target="_blank">View material</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <img alt="" src="images/composting.jpg" width="100%" height="150px">
+                      <p class="fs-5 text-center">Composting Classes 101</p>
+                      <a href="images/composting.pdf" class="btn btn-primary col-md-6 offset-md-3" target="_blank">View material</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <img alt="" src="images/types.jpg" width="100%" height="150px">
+                      <p class="fs-5 text-center">Types of Renewable Energy</p>
+                      <a href="images/renewable.pdf" class="btn btn-primary col-md-6 offset-md-3" target="_blank">View material</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

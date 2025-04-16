@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainable Living Education</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e9f7e6; /* Light green background */
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #27ae60; /* Green color */
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+        h2 {
+            color: #2c3e50; /* Darker green */
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+        p {
+            line-height: 1.6;
+            color: #555;
+            font-size: 1.1em;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .section {
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        .section h3 {
+            color: #34495e; /* Darker blue-green for section headings */
+        }
+        .section p {
+            font-size: 1.1em;
+        }
+        .section img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: floatUp 1s ease-out forwards;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #2c3e50;
+            font-size: 1.1em;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .image-text {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideIn 1s ease-out forwards;
+        }
+        .image-text img {
+            width: 40%;
+            border-radius: 8px;
+            margin-right: 20px;
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideIn 1s ease-out forwards;
+        }
+        .image-text div {
+            width: 60%;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes floatUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateX(-30px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WHAT IS SUSTAINABILITY? HOW IS IT PRACTICED</h1>
+        <p>Sustainability is the practice of meeting current needs without compromising the ability of future generations to meet their own needs. It involves making conscious decisions that balance environmental, social, and economic factors to create a more resilient and equitable world. Sustainability is not just about environmental protection but also about creating systems that support a better quality of life for all people, today and in the future.
+
+Sustainable living is about making everyday choices that have minimal impact on the environment. This includes actions like reducing waste, conserving natural resources, using renewable energy, and supporting sustainable and ethical businesses. By prioritizing these principles, individuals can contribute to a healthier planet and a more sustainable way of life.</p>
+
+        <div class="section">
+            <h2>Reducing Waste</h2>
+            <p>One of the core principles of sustainable living is reducing waste. This can be achieved by minimizing consumption, reusing items, and recycling materials. Proper waste management and composting can significantly reduce landfill overflow and the use of non-renewable resources.</p>
+
+            <div class="image-text">
+                <img src="images/recycleee.jpg" alt="Reducing Waste">
+                <div>
+                    <p><strong>Recycling</strong> materials like paper, glass, and plastic helps conserve resources and energy while minimizing waste.</p>
+                    <p><strong>Composting</strong> organic waste like food scraps and yard clippings reduces the amount of waste sent to landfills and creates nutrient-rich soil.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Conserving Energy</h2>
+            <p>Conserving energy is crucial for reducing carbon footprints and minimizing environmental impact. Switching to renewable energy sources like solar, wind, or geothermal can significantly reduce reliance on fossil fuels. Additionally, simple energy-saving practices such as turning off lights, using energy-efficient appliances, and insulating homes can make a big difference.</p>
+
+            <div class="image-text">
+                <img src="images/saveenergy.jpg" alt="Conserving Energy">
+                <div>
+                    <p><strong>Solar panels</strong> can harness energy from the sun to power homes, reducing dependence on non-renewable energy sources.</p>
+                    <p><strong>LED lighting</strong> and energy-efficient appliances help minimize electricity consumption, saving money and resources.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Supporting Sustainable Products</h2>
+            <p>Supporting sustainable products and companies that prioritize ethical practices is another key aspect of sustainable living. This includes choosing locally grown food, supporting brands with eco-friendly products, and opting for products with minimal packaging or biodegradable materials.</p>
+
+            <div class="image-text">
+                <img src="images/eco.jpg" alt="Sustainable Products">
+                <div>
+                    <p><strong>Eco-friendly products</strong>, such as reusable bags, water bottles, and biodegradable household cleaners, help reduce plastic waste.</p>
+                    <p><strong>Locally sourced food</strong> helps reduce carbon emissions associated with transportation and supports local economies.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>By educating ourselves about sustainable living practices, we can take active steps toward creating a more sustainable future. Every choice we make has the potential to make a positive impact on the planet, our communities, and future generations.</p>
+        </div>
+    </div>
+
+    <script>
+        // Function to detect if an element is in the viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth);
+        }
+
+        // Function to add animation classes when the element comes into the viewport
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.section, .image-text, h1, h2, p');
+            elements.forEach(element => {
+                if (isInViewport(element)) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        // Listen for scroll events to trigger animations
+        window.addEventListener('scroll', handleScrollAnimations);
+        window.addEventListener('load', handleScrollAnimations);  // Also check on page load
+    </script>
+</body>
+</html>
