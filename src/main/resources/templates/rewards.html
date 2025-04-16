@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rewards System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #27ae60; /* Green background */
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #27ae60; /* Green color */
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+        .activities-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .activities-list li {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        .activities-list input {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        .reward-info {
+            margin-top: 30px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+        .reward-info span {
+            font-size: 24px;
+            color: #e67e22; /* Reward points color */
+        }
+        .swag-section {
+            margin-top: 30px;
+        }
+        .swag-section h3 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 28px;
+        }
+        .swag-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .swag-item p {
+            margin: 0;
+            font-size: 18px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+        .progress-tracker {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        .tracker-item {
+            font-size: 18px;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+        }
+        .earned {
+            background-color: #dff0d8; /* Highlight earned items */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Earn Rewards for Sustainable Actions</h1>
+        <p style="text-align: center;">Complete the activities listed below and earn points for every task completed. Collect points to redeem exciting swag items!</p>
+
+        <!-- List of activities and points -->
+        <ul class="activities-list">
+            <li><input type="checkbox" id="activity1"> <label for="activity1">Plant a tree (20 points)</label></li>
+            <li><input type="checkbox" id="activity2"> <label for="activity2">Recycle plastic waste (15 points)</label></li>
+            <li><input type="checkbox" id="activity3"> <label for="activity3">Switch to LED lights (10 points)</label></li>
+            <li><input type="checkbox" id="activity4"> <label for="activity4">Use public transport (25 points)</label></li>
+            <li><input type="checkbox" id="activity5"> <label for="activity5">Reduce water usage by 20% (30 points)</label></li>
+            <li><input type="checkbox" id="activity6"> <label for="activity6">Support sustainable brands (20 points)</label></li>
+        </ul>
+
+        <!-- Display total reward points -->
+        <div class="reward-info">
+            <p>Total Points Earned: <span id="totalPoints">0</span></p>
+        </div>
+
+        <!-- Swag items -->
+        <div class="swag-section">
+            <h3>Swag You Can Earn</h3>
+            <div class="swag-item" id="swag1">
+                <p>Eco-friendly Tote Bag (50 points)</p>
+                <p>Earn 50 points to get a reusable tote bag for your groceries!</p>
+            </div>
+            <div class="swag-item" id="swag2">
+                <p>Reusable Water Bottle (75 points)</p>
+                <p>Earn 75 points to get a stylish water bottle to reduce plastic use!</p>
+            </div>
+            <div class="swag-item" id="swag3">
+                <p>Sustainable T-shirt (100 points)</p>
+                <p>Earn 100 points to get a sustainable cotton t-shirt as a reward!</p>
+            </div>
+        </div>
+
+        <!-- Progress Tracker Section -->
+        <div class="progress-tracker">
+            <h3>Swag Progress Tracker</h3>
+            <div class="tracker-item" id="tracker-swag1">
+                <p>Eco-friendly Tote Bag: <span id="status-swag1">Not Earned</span></p>
+            </div>
+            <div class="tracker-item" id="tracker-swag2">
+                <p>Reusable Water Bottle: <span id="status-swag2">Not Earned</span></p>
+            </div>
+            <div class="tracker-item" id="tracker-swag3">
+                <p>Sustainable T-shirt: <span id="status-swag3">Not Earned</span></p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Start completing activities to earn points and contribute to a greener future!</p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to track points, check swag eligibility, and update the progress tracker
+        const activities = [
+            { id: 'activity1', points: 20 },
+            { id: 'activity2', points: 15 },
+            { id: 'activity3', points: 10 },
+            { id: 'activity4', points: 25 },
+            { id: 'activity5', points: 30 },
+            { id: 'activity6', points: 20 }
+        ];
+
+        // Function to calculate total points and check swag eligibility
+        function calculateTotalPoints() {
+            let totalPoints = 0;
+            activities.forEach(activity => {
+                const checkbox = document.getElementById(activity.id);
+                if (checkbox.checked) {
+                    totalPoints += activity.points;
+                }
+            });
+            document.getElementById('totalPoints').textContent = totalPoints;
+
+            // Swag eligibility check
+            checkSwagEligibility(totalPoints);
+        }
+
+        // Function to check swag eligibility based on total points
+        function checkSwagEligibility(points) {
+            // Track and highlight swag eligibility
+            if (points >= 50) {
+                document.getElementById('swag1').style.backgroundColor = '#dff0d8'; // Highlight swag item
+                document.getElementById('status-swag1').textContent = 'Earned';
+                document.getElementById('tracker-swag1').classList.add('earned');
+            } else {
+                document.getElementById('swag1').style.backgroundColor = '#ecf0f1';
+                document.getElementById('status-swag1').textContent = 'Not Earned';
+                document.getElementById('tracker-swag1').classList.remove('earned');
+            }
+
+            if (points >= 75) {
+                document.getElementById('swag2').style.backgroundColor = '#dff0d8';
+                document.getElementById('status-swag2').textContent = 'Earned';
+                document.getElementById('tracker-swag2').classList.add('earned');
+            } else {
+                document.getElementById('swag2').style.backgroundColor = '#ecf0f1';
+                document.getElementById('status-swag2').textContent = 'Not Earned';
+                document.getElementById('tracker-swag2').classList.remove('earned');
+            }
+
+            if (points >= 100) {
+                document.getElementById('swag3').style.backgroundColor = '#dff0d8';
+                document.getElementById('status-swag3').textContent = 'Earned';
+                document.getElementById('tracker-swag3').classList.add('earned');
+            } else {
+                document.getElementById('swag3').style.backgroundColor = '#ecf0f1';
+                document.getElementById('status-swag3').textContent = 'Not Earned';
+                document.getElementById('tracker-swag3').classList.remove('earned');
+            }
+        }
+
+        // Event listeners for checkboxes to update points and swag eligibility
+        activities.forEach(activity => {
+            const checkbox = document.getElementById(activity.id);
+            checkbox.addEventListener('change', calculateTotalPoints);
+        });
+    </script>
+</body>
+</html>

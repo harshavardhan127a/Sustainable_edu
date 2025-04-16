@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Creator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f8f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #27ae60;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .container {
+            padding: 20px;
+            margin: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-form, .quiz-container, .certificate {
+            margin-bottom: 20px;
+        }
+
+        .question-form input, .question-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .quiz-question {
+            margin-bottom: 20px;
+        }
+
+        .quiz-question p {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .quiz-question label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .quiz-question input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .submit-btn, .start-quiz-btn {
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover, .start-quiz-btn:hover {
+            background-color: #2ecc71;
+        }
+
+        .certificate {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #eafaf1;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            color: #27ae60;
+        }
+
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            display: none;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff5733;
+            opacity: 0;
+            animation: confetti 2s forwards;
+        }
+
+        @keyframes confetti {
+            0% {
+                opacity: 1;
+                transform: translateY(-50px) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(200px) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Quiz Creator</h1>
+</header>
+
+<div class="container">
+
+    <!-- Form to add questions and answers -->
+    <div class="question-form">
+        <h2>Add Questions</h2>
+        <label for="question">Question</label>
+        <textarea id="question" placeholder="Enter question"></textarea>
+
+        <label for="option1">Option 1</label>
+        <input type="text" id="option1" placeholder="Enter option 1">
+
+        <label for="option2">Option 2</label>
+        <input type="text" id="option2" placeholder="Enter option 2">
+
+        <label for="option3">Option 3</label>
+        <input type="text" id="option3" placeholder="Enter option 3">
+
+        <label for="correct-answer">Correct Answer</label>
+        <select id="correct-answer">
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+        </select>
+
+        <button class="submit-btn" onclick="saveQuestion()">Save Question</button>
+    </div>
+
+    <!-- Start Quiz Button -->
+    <button class="start-quiz-btn" onclick="startQuiz()">Start Quiz</button>
+
+    <!-- Quiz Questions will be displayed here -->
+    <div id="quiz-questions" class="quiz-container" style="display:none;">
+        <!-- Dynamic Questions will be inserted here -->
+    </div>
+
+    <!-- Certificate -->
+    <div id="certificate" class="certificate">
+        <h2>Congratulations!</h2>
+        <p>You have successfully completed the quiz and earned your certificate!</p>
+        <p>Certificate of Completion</p>
+        <button onclick="printCertificate()">Print Certificate</button>
+    </div>
+
+    <!-- Confetti Container -->
+    <div id="confetti-container" class="confetti-container"></div>
+</div>
+
+<script>
+    let questions = [];
+
+    // Save a new question
+    function saveQuestion() {
+        const questionText = document.getElementById('question').value;
+        const option1 = document.getElementById('option1').value;
+        const option2 = document.getElementById('option2').value;
+        const option3 = document.getElementById('option3').value;
+        const correctAnswer = document.getElementById('correct-answer').value;
+
+        // Store the question in an array
+        questions.push({
+            question: questionText,
+            options: [option1, option2, option3],
+            correctAnswer: correctAnswer
+        });
+
+        // Clear input fields
+        document.getElementById('question').value = '';
+        document.getElementById('option1').value = '';
+        document.getElementById('option2').value = '';
+        document.getElementById('option3').value = '';
+        document.getElementById('correct-answer').value = '1';
+    }
+
+    // Start the quiz
+    function startQuiz() {
+        if (questions.length === 0) {
+            alert('Please add some questions first!');
+            return;
+        }
+
+        // Hide the form and show the quiz questions
+        document.querySelector('.question-form').style.display = 'none';
+        document.querySelector('.start-quiz-btn').style.display = 'none';
+        document.getElementById('quiz-questions').style.display = 'block';
+
+        // Display all questions
+        const quizContainer = document.getElementById('quiz-questions');
+        quizContainer.innerHTML = '';
+        questions.forEach((q, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.classList.add('quiz-question');
+
+            questionDiv.innerHTML = `
+                <p>${index + 1}. ${q.question}</p>
+                <label><input type="radio" name="q${index}" value="1"> ${q.options[0]}</label>
+                <label><input type="radio" name="q${index}" value="2"> ${q.options[1]}</label>
+                <label><input type="radio" name="q${index}" value="3"> ${q.options[2]}</label>
+            `;
+
+            quizContainer.appendChild(questionDiv);
+        });
+
+        // Add the submit button for the quiz
+        const submitBtn = document.createElement('button');
+        submitBtn.classList.add('submit-btn');
+        submitBtn.textContent = 'Submit Quiz';
+        submitBtn.onclick = submitQuiz;
+        quizContainer.appendChild(submitBtn);
+    }
+
+    // Submit the quiz and check answers
+    function submitQuiz() {
+        let correctAnswers = 0;
+
+        questions.forEach((q, index) => {
+            const selectedOption = document.querySelector(`input[name="q${index}"]:checked`);
+            if (selectedOption && selectedOption.value === q.correctAnswer) {
+                correctAnswers++;
+            }
+        });
+
+        if (correctAnswers >= Math.ceil(questions.length / 2)) {
+            document.getElementById('certificate').style.display = 'block';
+            triggerConfetti();
+        } else {
+            alert('You need more correct answers to earn a certificate!');
+        }
+    }
+
+    // Trigger confetti
+    function triggerConfetti() {
+        const container = document.getElementById('confetti-container');
+        container.style.display = 'block';
+        for (let i = 0; i < 100; i++) {
+            let confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * window.innerWidth + 'px';
+            confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            container.appendChild(confetti);
+        }
+    }
+
+    // Print the certificate
+    function printCertificate() {
+        window.print();
+    }
+</script>
+
+</body>
+</html>
