@@ -1,5 +1,6 @@
-<<<<<<< HEAD
-"# sustainable_education" 
-=======
-# Sustainable_edu
->>>>>>> f3dbb4807a4c4fd40c01665070675a5e8e66d984
+This is the project Sustainable education on Java full stack development
+The modules that are used:
+  1. Login/Signin
+  2. Home page(Landing page)
+  3. Online quiz(This is for learinig)
+The database is used mysql
